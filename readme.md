@@ -1,10 +1,18 @@
-Bonobo Git Server
+Bonobo Git Server (fork)
 ==============================================
 
-[![Build status](https://ci.appveyor.com/api/projects/status/4vyllwtb5i645lrt/branch/master?svg=true)](https://ci.appveyor.com/project/jakubgarfield/bonobo-git-server)
+Thank you for downloading Bonobo Git Server (fork). 
 
-Thank you for downloading Bonobo Git Server. For more information please visit [http://bonobogitserver.com](http://bonobogitserver.com).
-
+Roadmap
+-----------------------------------------------
+* Forked project
+* Update dependencies
+* Drop DotNetZip dependency for System.IO.Compression
+* Move AD to OWIN
+* Cleanup Tests
+  
+<br><br>
+(begin original readme)
 
 Prerequisites
 -----------------------------------------------
