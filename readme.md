@@ -1,13 +1,16 @@
-Bonobo Git Server (fork)
+gitserver.net (git-server-dot-net - a fork of Bonobo Git Server)
 ==============================================
 
-Thank you for downloading Bonobo Git Server (fork). 
+Thank you for downloading gitserver.net (a fork of Bonobo Git Server).  
+
+gitserver.net is a C#/IIS/.NET Framework based HTTP(S) and GIT server (and will remain targed to the .NET Framework).
 
 Roadmap
 -----------------------------------------------
 - [x] Forked project
 - [x] Update NuGet dependencies
 - [x] Drop DotNetZip dependency for System.IO.Compression
+- [ ] Cleanup naming conventions
 - [ ] Update javascript dependencies
 - [ ] Move AD to OWIN
 - [ ] Cleanup Tests
