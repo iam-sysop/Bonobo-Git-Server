@@ -10,6 +10,8 @@ Roadmap
 * Drop DotNetZip dependency for System.IO.Compression
 * Move AD to OWIN
 * Cleanup Tests
+
+**CURRENT DEVELOPMENT BRANCH: [v6.6.0](https://github.com/iam-sysop/Bonobo-Git-Server/tree/v6.6.0)**
   
 <br><br>
 (begin original readme)
