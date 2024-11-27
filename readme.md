@@ -1,4 +1,4 @@
-gitserver.net (git-server-dot-net) (a fork of Bonobo Git Server)
+gitserver.net (git-server-dot-net - a fork of Bonobo Git Server)
 ==============================================
 
 Thank you for downloading gitserver.net (a fork of Bonobo Git Server).  
