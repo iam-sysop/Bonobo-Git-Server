@@ -111,7 +111,7 @@ namespace Bonobo.Git.Server
         {
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.AppSettings()
-                .WriteTo.RollingFile(GetLogFileNameFormat())
+                .WriteTo.File(GetLogFileNameFormat(),shared:true,rollingInterval:RollingInterval.Day)
                 .CreateLogger();
         }
 
@@ -122,7 +122,7 @@ namespace Bonobo.Git.Server
             {
                 logDirectory = @"~\App_Data\Logs";
             }
-            return Path.Combine(HostingEnvironment.MapPath(logDirectory), "log-{Date}.txt");
+            return Path.Combine(HostingEnvironment.MapPath(logDirectory), "log-.txt");
         }
 
         private static void RegisterDependencyResolver()

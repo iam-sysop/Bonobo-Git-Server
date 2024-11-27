@@ -3,6 +3,18 @@ title: Changelog
 description: Tracks changes and bug fixes between different versions of Bonobo Git Server for Windows
 tags: [Changelog, Changes, Bug Fixes, Features]
 ---
+## Version 6.6.0
+**28 November 2024**
+
+### Maintenance ###
+* Re-targeted to .NET Framework v4.7.2
+* DROP dependency on DotNetZip
+* Update remaining dependencies
+* Update highlight.js library
+
+### Potential Issues
+
+* Bonono.Git.Testing project may not complete - contains many outdated dependencies not yet resolved
 
 ## Version 6.5.0
 

@@ -5,11 +5,11 @@ using Bonobo.Git.Server.Data.Update;
 using Bonobo.Git.Server.Helpers;
 using Bonobo.Git.Server.Models;
 using Bonobo.Git.Server.Security;
-using Ionic.Zip;
 using MimeTypes;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
@@ -221,8 +221,7 @@ namespace Bonobo.Git.Server.Controllers
             }
             using (var browser = new RepositoryBrowser(Path.Combine(UserConfiguration.Current.Repositories, model.Name)))
             {
-                string defaultReferenceName;
-                browser.BrowseTree(null, null, out defaultReferenceName);
+                browser.BrowseTree(null, null, out string defaultReferenceName);
                 RouteData.Values.Add("encodedName", defaultReferenceName);
             }
 
@@ -264,15 +263,13 @@ namespace Bonobo.Git.Server.Controllers
 
             using (var browser = new RepositoryBrowser(Path.Combine(UserConfiguration.Current.Repositories, repo.Name)))
             {
-                string referenceName;
-                var files = browser.BrowseTree(name, path, out referenceName, includeDetails).ToList();
+                var files = browser.BrowseTree(name, path, out string referenceName, includeDetails).ToList();
 
                 var readme = files.FirstOrDefault(x => x.Name.Equals("readme.md", StringComparison.OrdinalIgnoreCase));
                 string readmeTxt = string.Empty;
                 if (readme != null)
                 {
-                    string refereceName;
-                    var blob = browser.BrowseBlob(name, readme.Path, out refereceName);
+                    var blob = browser.BrowseBlob(name, readme.Path, out string refereceName);
                     readmeTxt = blob.Text;
                 }
                 var model = new RepositoryTreeModel
@@ -307,8 +304,7 @@ namespace Bonobo.Git.Server.Controllers
             {
                 var name = PathEncoder.Decode(encodedName);
                 var path = PathEncoder.Decode(encodedPath);
-                string referenceName;
-                var model = browser.BrowseBlob(name, path, out referenceName);
+                var model = browser.BrowseBlob(name, path, out string referenceName);
                 model.Logo = new RepositoryLogoDetailModel(repo.Logo);
                 PopulateBranchesData(browser, referenceName);
                 PopulateAddressBarData(path);
@@ -327,8 +323,7 @@ namespace Bonobo.Git.Server.Controllers
             {
                 var name = PathEncoder.Decode(encodedName);
                 var path = PathEncoder.Decode(encodedPath);
-                string referenceName;
-                var model = browser.BrowseBlob(name, path, out referenceName);
+                var model = browser.BrowseBlob(name, path, out string referenceName);
                 model.Logo = new RepositoryLogoDetailModel(repo.Logo);
 
                 if (!display)
@@ -358,8 +353,7 @@ namespace Bonobo.Git.Server.Controllers
             {
                 var name = PathEncoder.Decode(encodedName);
                 var path = PathEncoder.Decode(encodedPath);
-                string referenceName;
-                var model = browser.GetBlame(name, path, out referenceName);
+                var model = browser.GetBlame(name, path, out string referenceName);
                 model.Logo = new RepositoryLogoDetailModel(repo.Logo);
                 PopulateBranchesData(browser, referenceName);
                 PopulateAddressBarData(path);
@@ -382,43 +376,43 @@ namespace Bonobo.Git.Server.Controllers
             string headerValue = ContentDispositionUtil.GetHeaderValue((name ?? repo.Name) + ".zip");
             Response.AddHeader("Content-Disposition", headerValue);
 
-            using (var outputZip = new ZipFile())
+            using (MemoryStream _stream = new MemoryStream())
             {
-                outputZip.UseZip64WhenSaving = Zip64Option.Always;
-                outputZip.AlternateEncodingUsage = ZipOption.AsNecessary;
-                outputZip.AlternateEncoding = Encoding.Unicode;
-
+                using (var outputZip = new ZipArchive(_stream, ZipArchiveMode.Create))
+            {
                 using (var browser = new RepositoryBrowser(Path.Combine(UserConfiguration.Current.Repositories, repo.Name)))
                 {
                     AddTreeToZip(browser, name, path, outputZip);
                 }
 
-                outputZip.Save(Response.OutputStream);
+                    Response.Write(outputZip);
 
                 return new EmptyResult();
             }
         }
+        }
 
-        private static void AddTreeToZip(RepositoryBrowser browser, string name, string path, ZipFile outputZip)
+        private static void AddTreeToZip(RepositoryBrowser browser, string name, string path, ZipArchive outputZip)
         {
-            string referenceName;
-            var treeNode = browser.BrowseTree(name, path, out referenceName);
+            var treeNode = browser.BrowseTree(name, path, out string _);
 
             foreach (var item in treeNode)
             {
                 if (item.IsLink)
                 {
-                    outputZip.AddDirectoryByName(Path.Combine(item.TreeName, item.Path));
+                    outputZip.CreateEntry(Path.Combine(item.TreeName, item.Path));
                 }
                 else if (!item.IsTree)
                 {
-                    string blobReferenceName;
-                    var model = browser.BrowseBlob(item.TreeName, item.Path, out blobReferenceName);
-                    outputZip.AddEntry(Path.Combine(item.TreeName, item.Path), model.Data);
+                    var model = browser.BrowseBlob(item.TreeName, item.Path, out string blobReferenceName);
+                    ZipArchiveEntry _thisFile = outputZip.CreateEntry(Path.Combine(item.TreeName, item.Path));
+                    using (StreamWriter _fileStream = new StreamWriter(_thisFile.Open()))
+                    {
+                        _fileStream.Write(model.Data);                        
+                    }
                 }
                 else
                 {
-                    // recursive call
                     AddTreeToZip(browser, item.TreeName, item.Path, outputZip);
                 }
             }
@@ -435,9 +429,7 @@ namespace Bonobo.Git.Server.Controllers
             using (var browser = new RepositoryBrowser(Path.Combine(UserConfiguration.Current.Repositories, repo.Name)))
             {
                 var name = PathEncoder.Decode(encodedName);
-                string referenceName;
-                int totalCount;
-                var commits = browser.GetTags(name, page, 10, out referenceName, out totalCount);
+                var commits = browser.GetTags(name, page, 10, out string referenceName, out int totalCount);
                 PopulateBranchesData(browser, referenceName);
                 ViewBag.TotalCount = totalCount;
                 return View(new RepositoryCommitsModel
@@ -460,9 +452,7 @@ namespace Bonobo.Git.Server.Controllers
             using (var browser = new RepositoryBrowser(Path.Combine(UserConfiguration.Current.Repositories, repo.Name)))
             {
                 var name = PathEncoder.Decode(encodedName);
-                string referenceName;
-                int totalCount;
-                var commits = browser.GetCommits(name, page.Value, 10, out referenceName, out totalCount);
+                var commits = browser.GetCommits(name, page.Value, 10, out string referenceName, out int totalCount);
                 PopulateBranchesData(browser, referenceName);
                 ViewBag.TotalCount = totalCount;
 
@@ -618,8 +608,7 @@ namespace Bonobo.Git.Server.Controllers
             {
                 var path = PathEncoder.Decode(encodedPath);
                 var name = PathEncoder.Decode(encodedName);
-                string referenceName;
-                var commits = browser.GetHistory(path, name, out referenceName);
+                var commits = browser.GetHistory(path, name, out string referenceName);
                 return View(new RepositoryCommitsModel
                 {
                     Commits = commits,
@@ -728,7 +717,7 @@ namespace Bonobo.Git.Server.Controllers
                 Teams = model.PostedSelectedTeams != null ? model.PostedSelectedTeams.Select(x => TeamRepository.GetTeam(x)).ToArray() : new TeamModel[0],
                 AnonymousAccess = model.AllowAnonymous,
                 AuditPushUser = model.AuditPushUser,
-                Logo = model.Logo != null ? model.Logo.BinaryData : null,
+                Logo = model.Logo?.BinaryData,
                 AllowAnonymousPush = model.AllowAnonymousPush,
                 RemoveLogo = model.Logo != null && model.Logo.RemoveLogo,
                 LinksUseGlobal = model.LinksUseGlobal,
@@ -740,7 +729,7 @@ namespace Bonobo.Git.Server.Controllers
         private static void DeleteFileSystemInfo(FileSystemInfo fsi)
         {
             fsi.Attributes = FileAttributes.Normal;
-            var di = fsi as DirectoryInfo;
+            DirectoryInfo di = fsi as DirectoryInfo;
 
             if (di != null)
             {

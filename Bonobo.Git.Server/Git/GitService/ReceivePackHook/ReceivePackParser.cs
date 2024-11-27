@@ -1,8 +1,8 @@
-﻿using Ionic.Zlib;
-using LibGit2Sharp;
+﻿using LibGit2Sharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
@@ -56,7 +56,7 @@ namespace Bonobo.Git.Server.Git.GitService.ReceivePackHook
                     {
                         break;
                     }
-                    len = len - buff4.Length;
+                    len -= buff4.Length;
 
                     var accum = new LinkedList<byte>();
 
@@ -118,7 +118,7 @@ namespace Bonobo.Git.Server.Git.GitService.ReceivePackHook
                         while ((buff1[0] >> 7) == 1)
                         {
                             ReadStream(inStream, buff1);
-                            len = len | ((long)(buff1[0] & 127) << shiftAmount);
+                            len |= ((long)(buff1[0] & 127) << shiftAmount);
 
                             shiftAmount += 7;
                         }
@@ -141,7 +141,7 @@ namespace Bonobo.Git.Server.Git.GitService.ReceivePackHook
                         var origPosition = inStream.Position;
                         long offsetVal = 0;
 
-                        using (var zlibStream = new ZlibStream(inStream, CompressionMode.Decompress, true))
+                        using (var zlibStream = new DeflateStream(inStream, CompressionMode.Decompress, true))
                         {
                             // read compressed data max 16KB at a time
                             var readRemaining = len;
@@ -156,7 +156,7 @@ namespace Bonobo.Git.Server.Git.GitService.ReceivePackHook
                                 var parsedCommit = ParseCommitDetails(buff16K, len);
                                 packCommits.Add(parsedCommit);
                             }
-                            offsetVal = zlibStream.TotalIn;
+                            offsetVal = zlibStream.Length;
                         }
                         // move back position a bit because ZLibStream reads more than needed for inflating
                         inStream.Seek(origPosition + offsetVal, SeekOrigin.Begin);

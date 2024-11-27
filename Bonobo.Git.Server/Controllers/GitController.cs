@@ -4,7 +4,7 @@ using Bonobo.Git.Server.Git;
 using Bonobo.Git.Server.Git.GitService;
 using Bonobo.Git.Server.Models;
 using Bonobo.Git.Server.Security;
-using Ionic.Zlib;
+using System.IO.Compression;
 using Serilog;
 using System;
 using System.IO;
@@ -115,8 +115,7 @@ namespace Bonobo.Git.Server.Controllers
                 Log.Warning("GitC: Can't create {RepositoryName} - directory already exists", repositoryName);
                 return false;
             }
-            RepositoryModel repository = new RepositoryModel();
-            repository.Name = repositoryName;
+            RepositoryModel repository = new RepositoryModel() { Name = repositoryName };
             if (!repository.NameIsValid)
             {
                 // We don't like this name

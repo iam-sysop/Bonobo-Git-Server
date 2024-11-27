@@ -5,31 +5,33 @@ Thank you for downloading Bonobo Git Server (fork).
 
 Roadmap
 -----------------------------------------------
-* Forked project
-* Update dependencies
-* Drop DotNetZip dependency for System.IO.Compression
-* Move AD to OWIN
-* Cleanup Tests
+- [x] Forked project
+- [x] Update NuGet dependencies
+- [x] Drop DotNetZip dependency for System.IO.Compression
+- [ ] Update javascript dependencies
+- [ ] Move AD to OWIN
+- [ ] Cleanup Tests
   
-<br><br>
-(begin original readme)
+
 
 Prerequisites
 -----------------------------------------------
-
-* Internet Information Services 7 and higher
-    * [How to Install IIS 8 on Windows 8](http://www.howtogeek.com/112455/how-to-install-iis-8-on-windows-8/)
-    * [Installing IIS 8 on Windows Server 2012](http://www.iis.net/learn/get-started/whats-new-in-iis-8/installing-iis-8-on-windows-server-2012)
-    * [Installing IIS 7 on Windows Server 2008 or Windows Server 2008 R2](http://www.iis.net/learn/install/installing-iis-7/installing-iis-7-and-above-on-windows-server-2008-or-windows-server-2008-r2)
-    * [Installing IIS 7 on Windows Vista and Windows 7](http://www.iis.net/learn/install/installing-iis-7/installing-iis-on-windows-vista-and-windows-7)
-* [.NET Framework 4.6](https://www.microsoft.com/en-gb/download/details.aspx?id=48130)
-    * Windows Vista SP2, Windows 7, Windows 8 and higher
-    * Windows Server 2008 R2, Windows Server 2008 SP2, Windows Server 2012 and higher
-    * Don't forget to register .NET framework with your IIS
-        * Run `%windir%\Microsoft.NET\Framework\v4.0.30319\aspnet_regiis.exe -ir` with administrator privileges
-
-<hr />
-
+* Microsoft IIS 7.5 or higher
+* Windows based OS
+    * ~~Windows Vista~~ [^1][^2]
+    * Windows 7 [^2]
+    * Windows 8.x [^2]
+    * Windows 10 or higher
+    * ~~Windows Server 2008~~ [^1][^2]
+    * Windows Server 2008 R2 [^2]
+    * Windows Server 2012 [^2]
+    * Windows Server 2016
+    * Windows Server 2019 or higher
+* [.NET Framework 4.7.2](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472)  
+    OFFLINE INSTALLERS:  
+    * [Runtime](https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net472-offline-installer)  
+    * [Developer SDK](https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net472-developer-pack-offline-installer)
+    
 
 
 Update
@@ -129,10 +131,7 @@ Bonobo provides the following environment variables:
 
 **Beware that due to the way HTTP basic authentication works, if anonymous operations (push/pull) are enabled the variables above will always be empty!**
 
-New release
------------------------------------------------
-
-* update [changelog](https://github.com/jakubgarfield/Bonobo-Git-Server/blob/master/changelog.md)
-* update version numbers in [appveyor.yml](https://github.com/jakubgarfield/Bonobo-Git-Server/blob/master/appveyor.yml)
-* add tag so it appears under [releases](https://github.com/jakubgarfield/Bonobo-Git-Server/releases) with `git tag -a 6.0.0 -m "Release 6.0.0"`
-* add zipped version to bonobogitserver.com at [Bonobo-Git-Server-Web](https://github.com/jakubgarfield/Bonobo-Git-Server-Web)
+<br><hr>  
+[^1]: no longer supported - underlying OS does not support .NET Framework v4.7.2  
+[^2]: underlying OS is EOL by vendor and not recommended for production usage
+    
