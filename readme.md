@@ -135,6 +135,7 @@ Bonobo provides the following environment variables:
 **Beware that due to the way HTTP basic authentication works, if anonymous operations (push/pull) are enabled the variables above will always be empty!**
 
 <br>
+  
 [^1]: no longer supported - underlying OS does not support .NET Framework v4.7.2  
-[^2]: underlying OS is EOL by vendor and not recommended for production usage
+[^2]: underlying OS is EOL by vendor and not recommended for production usage  
     
