@@ -379,17 +379,17 @@ namespace gitserverdotnet.Controllers
             using (MemoryStream _stream = new MemoryStream())
             {
                 using (var outputZip = new ZipArchive(_stream, ZipArchiveMode.Create))
-            {
-                using (var browser = new RepositoryBrowser(Path.Combine(UserConfiguration.Current.Repositories, repo.Name)))
                 {
-                    AddTreeToZip(browser, name, path, outputZip);
+                    using (var browser = new RepositoryBrowser(Path.Combine(UserConfiguration.Current.Repositories, repo.Name)))
+                    {
+                        AddTreeToZip(browser, name, path, outputZip);
+                    }
+                    
+                    Response.BinaryWrite(_stream.ToArray());
+
+                    return new EmptyResult();
                 }
-
-                    Response.Write(outputZip);
-
-                return new EmptyResult();
             }
-        }
         }
 
         private static void AddTreeToZip(RepositoryBrowser browser, string name, string path, ZipArchive outputZip)
@@ -406,7 +406,7 @@ namespace gitserverdotnet.Controllers
                 {
                     var model = browser.BrowseBlob(item.TreeName, item.Path, out string blobReferenceName);
                     ZipArchiveEntry _thisFile = outputZip.CreateEntry(Path.Combine(item.TreeName, item.Path));
-                    using (StreamWriter _fileStream = new StreamWriter(_thisFile.Open()))
+                    using (BinaryWriter _fileStream = new BinaryWriter( _thisFile.Open()))
                     {
                         _fileStream.Write(model.Data);                        
                     }
