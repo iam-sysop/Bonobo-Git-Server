@@ -10,7 +10,7 @@ Roadmap
 - [x] Forked project
 - [x] Update NuGet dependencies
 - [x] Drop DotNetZip dependency for System.IO.Compression
-- [ ] Cleanup naming conventions
+- [x] Cleanup naming conventions
 - [ ] Update javascript dependencies
 - [ ] Move AD to OWIN
 - [ ] Cleanup Tests
