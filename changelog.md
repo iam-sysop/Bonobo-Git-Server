@@ -1,10 +1,13 @@
 ---
 title: Changelog
-description: Tracks changes and bug fixes between different versions of Bonobo Git Server for Windows
+description: Tracks changes and bug fixes between different versions of gitserver.net for Windows
 tags: [Changelog, Changes, Bug Fixes, Features]
 ---
 ## Version 6.6.0
 **28 November 2024**
+
+### BREAKING CHANGES ###
+* Project renamed to gitserver.net (git-server-dot-net)
 
 ### Maintenance ###
 * Re-targeted to .NET Framework v4.7.2
@@ -14,7 +17,7 @@ tags: [Changelog, Changes, Bug Fixes, Features]
 
 ### Potential Issues
 
-* Bonono.Git.Testing project may not complete - contains many outdated dependencies not yet resolved
+* gitserverdotnet.Test project may not complete - contains many outdated dependencies not yet resolved
 
 ## Version 6.5.0
 

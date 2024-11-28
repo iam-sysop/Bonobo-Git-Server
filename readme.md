@@ -43,7 +43,7 @@ Update
 Before each update please read carefully the information about **compatibility issues** between your version and the latest one in [changelog](/changelog.md).
 
 * Delete all the files in the installation folder **except App_Data**.
-    * Default location is `C:\inetpub\wwwroot\Bonobo.Git.Server`.
+    * Default location is `C:\inetpub\wwwroot\gitserverdotnet`.
 * Copy the files from the downloaded archive to the server location.
 
 
@@ -54,23 +54,23 @@ Before each update please read carefully the information about **compatibility i
 Installation
 -----------------------------------------------
 
-These steps illustrate simple installation with Windows 2008 Server and IIS 7. They are exactly the same for higher platforms (Windows Server 2012 and IIS 8.0).
+These steps illustrate simple installation with Windows 2008 R2 Server and IIS 7.5. They are exactly the same for higher platforms (Windows Server 2012+ and IIS 8.0+).
 
 * **Extract the files** from the installation archive to `C:\inetpub\wwwroot`
 
-* **Allow IIS User to modify** `C:\inetpub\wwwroot\Bonobo.Git.Server\App_Data` folder. To do so
+* **Allow IIS User to modify** `C:\inetpub\wwwroot\gitserverdotnet\App_Data` folder. To do so
     * select Properties of App_Data folder,
     * go to Security tab, 
     * click edit, 
     * select IIS user (in my case IIS_IUSRS) and add Modify and Write permission,
     * confirm these settings with Apply button.
 
-* **Convert Bonobo.Git.Server to Application** in IIS
-    * Run IIS Manager and navigate to Sites -> Default Web Site. You should see Bonobo.Git.Server.
-    * Right click on Bonobo Git Server and convert to application.
+* **Convert gitserverdotnet to Application** in IIS
+    * Run IIS Manager and navigate to Sites -> Default Web Site. You should see gitserverdotnet.
+    * Right click on gitserverdotnet and convert to application.
     * Check if the selected application pool runs on .NET 4.0 and convert the site.
 
-* **Launch your browser** and go to [http://localhost/Bonobo.Git.Server](http://localhost/Bonobo.Git.Server). Now you can see the initial page of Bonobo Git Server and everything is working.
+* **Launch your browser** and go to [http://localhost/gitserverdotnet](http://localhost/gitserverdotnet). Now you can see the initial page of gitserver.net and everything is working.
     * Default credentials are username: **admin** password: **admin**
 
 
@@ -95,8 +95,8 @@ Frequently Asked Questions
 
 #### How to backup data?
 
-* Go to the installation folder of Bonobo Git Server on the server.
-    * Default location is `C:\inetpub\wwwroot\Bonobo.Git.Server`.
+* Go to the installation folder of gitserver.net on the server.
+    * Default location is `C:\inetpub\wwwroot\gitserverdotnet`.
 * Copy the content of App_Data folder to your backup directory.
 * If you changed the location of your repositories, backup them as well.
 
@@ -124,7 +124,7 @@ For allowing anonymous push you have to modify global settings.
 
 #### I'd like to use git hooks to restrict access. How do I access the web frontend usernam?
 
-Bonobo provides the following environment variables:
+gitserver.net provides the following environment variables:
 
 * `AUTH_USER`: The username used to login. Empty if it was an anonymous operation (clone/push/pull)
 * `REMOTE_USER`: Same as `AUTH_USER`

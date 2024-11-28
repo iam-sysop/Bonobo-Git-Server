@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <MainSolution>$(MSBuildThisFileDirectory)\Bonobo.Git.Server.sln</MainSolution>
+        <MainSolution>$(MSBuildThisFileDirectory)\gitserverdotnet.sln</MainSolution>
         <GitVersion>2.6.1</GitVersion>            
         <GitArchitecture>32</GitArchitecture>
     </PropertyGroup>
