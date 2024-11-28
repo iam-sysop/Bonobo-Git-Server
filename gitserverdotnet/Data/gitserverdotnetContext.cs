@@ -1,10 +1,10 @@
 using System.Data.Common;
-using Bonobo.Git.Server.Data.Mapping;
+using gitserverdotnet.Data.Mapping;
 using System.Data.Entity;
 
-namespace Bonobo.Git.Server.Data
+namespace gitserverdotnet.Data
 {
-    public partial class BonoboGitServerContext : DbContext
+    public partial class gitserverdotnetContext : DbContext
     {
         public DbSet<Repository> Repositories { get; set; }
         public DbSet<Role> Roles { get; set; }
@@ -12,24 +12,24 @@ namespace Bonobo.Git.Server.Data
         public DbSet<User> Users { get; set; }
 
 
-        static BonoboGitServerContext()
+        static gitserverdotnetContext()
         {
-            Database.SetInitializer<BonoboGitServerContext>(null);
+            Database.SetInitializer<gitserverdotnetContext>(null);
         }
 
-        public BonoboGitServerContext()
-            : base("Name=BonoboGitServerContext")
+        public gitserverdotnetContext()
+            : base("Name=gitserverdotnetContext")
         {
         }
 
         // Don't make this public because it confuses Unity
-        private BonoboGitServerContext(DbConnection databaseConnection) : base(databaseConnection, false)
+        private gitserverdotnetContext(DbConnection databaseConnection) : base(databaseConnection, false)
         {
         }
 
-        public static BonoboGitServerContext FromDatabase(DbConnection databaseConnection)
+        public static gitserverdotnetContext FromDatabase(DbConnection databaseConnection)
         {
-            return new BonoboGitServerContext(databaseConnection);
+            return new gitserverdotnetContext(databaseConnection);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
