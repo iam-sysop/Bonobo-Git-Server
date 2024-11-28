@@ -628,18 +628,18 @@
     <Content Include="Views\Team\Delete.cshtml" />
     <Content Include="Views\Repository\Delete.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
-    <Content Include="packages.config">
+    <None Include="packages.config">
       <SubType>Designer</SubType>
-    </Content>
-    <Content Include="..\changelog.md">
+    </None>
+    <None Include="..\changelog.md">
       <Link>changelog.md</Link>
-    </Content>
+    </None>
     <Content Include="..\license.md">
       <Link>license.md</Link>
     </Content>
-    <Content Include="..\readme.md">
+    <None Include="..\readme.md">
       <Link>readme.md</Link>
-    </Content>
+    </None>
     <Content Include="App_Data\Web.config" />
     <Content Include="App_Data\Git\astextplain" />
     <Content Include="App_Data\Git\awk" />
@@ -661,8 +661,8 @@
     <Content Include="App_Data\Git\vim" />
     <Content Include="App_Data\Git\which" />
     <Content Include="App_Data\Git\yacc" />
-    <Content Include=".bowerrc" />
-    <Content Include="bower.json" />
+    <None Include=".bowerrc" />
+    <None Include="bower.json" />
     <Content Include="Content\fonts\opensans-bold.eot" />
     <Content Include="Content\fonts\opensans-bold.ttf" />
     <Content Include="Content\fonts\opensans-bold.woff" />
@@ -687,12 +687,6 @@
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <Content Include="Views\Repository\Tags.cshtml" />
     <Content Include="Views\Repository\_Tag.cshtml" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
