@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\LibGit2Sharp.NativeBinaries.2.0.323\build\net46\LibGit2Sharp.NativeBinaries.props" Condition="Exists('..\packages\LibGit2Sharp.NativeBinaries.2.0.323\build\net46\LibGit2Sharp.NativeBinaries.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.Toolset.4.11.0\build\Microsoft.Net.Compilers.Toolset.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.Toolset.4.11.0\build\Microsoft.Net.Compilers.Toolset.props')" />
   <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
-  <Import Project="..\packages\LibGit2Sharp.NativeBinaries.2.0.322\build\net46\LibGit2Sharp.NativeBinaries.props" Condition="Exists('..\packages\LibGit2Sharp.NativeBinaries.2.0.322\build\net46\LibGit2Sharp.NativeBinaries.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -38,29 +38,6 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
-    <PublishDatabases>false</PublishDatabases>
-    <PackageAsSingleFile>true</PackageAsSingleFile>
-    <ExcludeApp_Data>false</ExcludeApp_Data>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
@@ -79,8 +56,8 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="LibGit2Sharp, Version=0.30.0.0, Culture=neutral, PublicKeyToken=7cbde695407f0333, processorArchitecture=MSIL">
-      <HintPath>..\packages\LibGit2Sharp.0.30.0\lib\net472\LibGit2Sharp.dll</HintPath>
+    <Reference Include="LibGit2Sharp, Version=0.31.0.0, Culture=neutral, PublicKeyToken=7cbde695407f0333, processorArchitecture=MSIL">
+      <HintPath>..\packages\LibGit2Sharp.0.31.0\lib\net472\LibGit2Sharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -292,6 +269,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnonymousComparer.cs" />
+    <Compile Include="App_Start\GitConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Attributes\AllViewsAttribute.cs" />
@@ -345,6 +323,7 @@
     <Compile Include="Git\GitService\ReplicatingStream.cs" />
     <Compile Include="Helpers\ADHelper.cs" />
     <Compile Include="Helpers\ConfigurationHelper.cs" />
+    <Compile Include="Helpers\IniConfigFileHelper.cs" />
     <Compile Include="Helpers\MembershipHelper.cs" />
     <Compile Include="Helpers\RepositoryCommitModelHelpers.cs" />
     <Compile Include="Models\RepositoryCommitTitle.cs" />
@@ -446,129 +425,6 @@
     <Compile Include="FilterProviders\UnityFilterAttributeFilterProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Git\antiword.exe" />
-    <Content Include="App_Data\Git\basename.exe" />
-    <Content Include="App_Data\Git\bash.exe" />
-    <Content Include="App_Data\Git\bison.exe" />
-    <Content Include="App_Data\Git\bzip2.exe" />
-    <Content Include="App_Data\Git\cat.exe" />
-    <Content Include="App_Data\Git\chmod.exe" />
-    <Content Include="App_Data\Git\cmp.exe" />
-    <Content Include="App_Data\Git\connect.exe" />
-    <Content Include="App_Data\Git\cp.exe" />
-    <Content Include="App_Data\Git\curl.exe" />
-    <Content Include="App_Data\Git\cut.exe" />
-    <Content Include="App_Data\Git\date.exe" />
-    <Content Include="App_Data\Git\diff.exe" />
-    <Content Include="App_Data\Git\dirname.exe" />
-    <Content Include="App_Data\Git\dos2unix.exe" />
-    <Content Include="App_Data\Git\du.exe" />
-    <Content Include="App_Data\Git\env.exe" />
-    <Content Include="App_Data\Git\expr.exe" />
-    <Content Include="App_Data\Git\false.exe" />
-    <Content Include="App_Data\Git\find.exe" />
-    <Content Include="App_Data\Git\flex.exe" />
-    <Content Include="App_Data\Git\gawk.exe" />
-    <Content Include="App_Data\Git\getcp.exe" />
-    <Content Include="App_Data\Git\git-receive-pack.exe" />
-    <Content Include="App_Data\Git\git-upload-archive.exe" />
-    <Content Include="App_Data\Git\git-upload-pack.exe" />
-    <Content Include="App_Data\Git\git.exe" />
-    <Content Include="App_Data\Git\gpg.exe" />
-    <Content Include="App_Data\Git\gpgkeys_curl.exe" />
-    <Content Include="App_Data\Git\gpgkeys_finger.exe" />
-    <Content Include="App_Data\Git\gpgkeys_hkp.exe" />
-    <Content Include="App_Data\Git\gpgkeys_ldap.exe" />
-    <Content Include="App_Data\Git\gpgsplit.exe" />
-    <Content Include="App_Data\Git\gpgv.exe" />
-    <Content Include="App_Data\Git\grep.exe" />
-    <Content Include="App_Data\Git\gunzip.exe" />
-    <Content Include="App_Data\Git\gzip.exe" />
-    <Content Include="App_Data\Git\head.exe" />
-    <Content Include="App_Data\Git\id.exe" />
-    <Content Include="App_Data\Git\kill.exe" />
-    <Content Include="App_Data\Git\less.exe" />
-    <Content Include="App_Data\Git\libapr-0-0.dll" />
-    <Content Include="App_Data\Git\libaprutil-0-0.dll" />
-    <Content Include="App_Data\Git\libcrypto.dll" />
-    <Content Include="App_Data\Git\libcurl.dll" />
-    <Content Include="App_Data\Git\libexpat-0.dll" />
-    <Content Include="App_Data\Git\libgsasl-7.def" />
-    <Content Include="App_Data\Git\libgsasl-7.dll" />
-    <Content Include="App_Data\Git\libiconv-2.dll" />
-    <Content Include="App_Data\Git\libneon-25.dll" />
-    <Content Include="App_Data\Git\libpoppler-7.dll" />
-    <Content Include="App_Data\Git\libssl.dll" />
-    <Content Include="App_Data\Git\libsvn_client-1-0.dll" />
-    <Content Include="App_Data\Git\libsvn_delta-1-0.dll" />
-    <Content Include="App_Data\Git\libsvn_diff-1-0.dll" />
-    <Content Include="App_Data\Git\libsvn_fs-1-0.dll" />
-    <Content Include="App_Data\Git\libsvn_fs_fs-1-0.dll" />
-    <Content Include="App_Data\Git\libsvn_ra-1-0.dll" />
-    <Content Include="App_Data\Git\libsvn_ra_dav-1-0.dll" />
-    <Content Include="App_Data\Git\libsvn_ra_local-1-0.dll" />
-    <Content Include="App_Data\Git\libsvn_ra_svn-1-0.dll" />
-    <Content Include="App_Data\Git\libsvn_repos-1-0.dll" />
-    <Content Include="App_Data\Git\libsvn_subr-1-0.dll" />
-    <Content Include="App_Data\Git\libsvn_swig_perl-1-0.dll" />
-    <Content Include="App_Data\Git\libsvn_wc-1-0.dll" />
-    <Content Include="App_Data\Git\libW11.dll" />
-    <Content Include="App_Data\Git\libz.dll" />
-    <Content Include="App_Data\Git\ln.exe" />
-    <Content Include="App_Data\Git\ls.exe" />
-    <Content Include="App_Data\Git\m4.exe" />
-    <Content Include="App_Data\Git\md5sum.exe" />
-    <Content Include="App_Data\Git\mkdir.exe" />
-    <Content Include="App_Data\Git\msmtp.exe" />
-    <Content Include="App_Data\Git\msys-1.0.dll" />
-    <Content Include="App_Data\Git\msys-crypto-1.0.0.dll" />
-    <Content Include="App_Data\Git\msys-minires.dll" />
-    <Content Include="App_Data\Git\msys-perl5_8.dll" />
-    <Content Include="App_Data\Git\msys-regex-1.dll" />
-    <Content Include="App_Data\Git\msys-ssl-1.0.0.dll" />
-    <Content Include="App_Data\Git\msys-z.dll" />
-    <Content Include="App_Data\Git\msysltdl-3.dll" />
-    <Content Include="App_Data\Git\mv.exe" />
-    <Content Include="App_Data\Git\openssl.exe" />
-    <Content Include="App_Data\Git\patch.exe" />
-    <Content Include="App_Data\Git\pdfinfo.exe" />
-    <Content Include="App_Data\Git\pdftotext.exe" />
-    <Content Include="App_Data\Git\perl.exe" />
-    <Content Include="App_Data\Git\ps.exe" />
-    <Content Include="App_Data\Git\pthreadGC2.dll" />
-    <Content Include="App_Data\Git\rebase.exe" />
-    <Content Include="App_Data\Git\rm.exe" />
-    <Content Include="App_Data\Git\rmdir.exe" />
-    <Content Include="App_Data\Git\rxvt.exe" />
-    <Content Include="App_Data\Git\scp.exe" />
-    <Content Include="App_Data\Git\sed.exe" />
-    <Content Include="App_Data\Git\sh.exe" />
-    <Content Include="App_Data\Git\sleep.exe" />
-    <Content Include="App_Data\Git\sort.exe" />
-    <Content Include="App_Data\Git\split.exe" />
-    <Content Include="App_Data\Git\ssh-add.exe" />
-    <Content Include="App_Data\Git\ssh-agent.exe" />
-    <Content Include="App_Data\Git\ssh-keygen.exe" />
-    <Content Include="App_Data\Git\ssh-keyscan.exe" />
-    <Content Include="App_Data\Git\ssh.exe" />
-    <Content Include="App_Data\Git\tail.exe" />
-    <Content Include="App_Data\Git\tar.exe" />
-    <Content Include="App_Data\Git\tcl85.dll" />
-    <Content Include="App_Data\Git\tclpip85.dll" />
-    <Content Include="App_Data\Git\tclsh.exe" />
-    <Content Include="App_Data\Git\tclsh85.exe" />
-    <Content Include="App_Data\Git\tee.exe" />
-    <Content Include="App_Data\Git\tk85.dll" />
-    <Content Include="App_Data\Git\touch.exe" />
-    <Content Include="App_Data\Git\tr.exe" />
-    <Content Include="App_Data\Git\true.exe" />
-    <Content Include="App_Data\Git\uname.exe" />
-    <Content Include="App_Data\Git\uniq.exe" />
-    <Content Include="App_Data\Git\unzip.exe" />
-    <Content Include="App_Data\Git\wc.exe" />
-    <Content Include="App_Data\Git\wish.exe" />
-    <Content Include="App_Data\Git\wish85.exe" />
-    <Content Include="App_Data\Git\xargs.exe" />
     <Content Include="App_Data\Repositories\note.txt" />
     <Content Include="Content\components\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\components\font-awesome\fonts\fontawesome-webfont.eot" />
@@ -641,26 +497,6 @@
       <Link>readme.md</Link>
     </None>
     <Content Include="App_Data\Web.config" />
-    <Content Include="App_Data\Git\astextplain" />
-    <Content Include="App_Data\Git\awk" />
-    <Content Include="App_Data\Git\bunzip2" />
-    <Content Include="App_Data\Git\clear" />
-    <Content Include="App_Data\Git\curl-ca-bundle.crt" />
-    <Content Include="App_Data\Git\c_rehash" />
-    <Content Include="App_Data\Git\docx2txt" />
-    <Content Include="App_Data\Git\echo" />
-    <Content Include="App_Data\Git\egrep" />
-    <Content Include="App_Data\Git\gitk" />
-    <Content Include="App_Data\Git\gpg-zip" />
-    <Content Include="App_Data\Git\patch.exe.manifest" />
-    <Content Include="App_Data\Git\printf" />
-    <Content Include="App_Data\Git\pwd" />
-    <Content Include="App_Data\Git\recodetree" />
-    <Content Include="App_Data\Git\start" />
-    <Content Include="App_Data\Git\vi" />
-    <Content Include="App_Data\Git\vim" />
-    <Content Include="App_Data\Git\which" />
-    <Content Include="App_Data\Git\yacc" />
     <None Include=".bowerrc" />
     <None Include="bower.json" />
     <Content Include="Content\fonts\opensans-bold.eot" />
@@ -672,19 +508,18 @@
     <Content Include="Content\fonts\opensans-regular.eot" />
     <Content Include="Content\fonts\opensans-regular.ttf" />
     <Content Include="Content\fonts\opensans-regular.woff" />
-    <Content Include="App_Data\.gitconfig" />
     <Content Include="Content\components\highlight\DIGESTS.md" />
     <Content Include="Content\components\highlight\LICENSE" />
     <Content Include="Content\components\highlight\package.json" />
     <Content Include="Content\components\highlight\README.md" />
-    <None Include="Properties\PublishProfiles\Release.pubxml" />
     <Content Include="Views\Repository\Blob.cshtml" />
     <Content Include="Views\Repository\Clone.cshtml" />
     <Content Include="Views\Repository\History.cshtml" />
     <Content Include="Views\Repository\Blame.cshtml" />
     <Content Include="Views\Home\ForgotPassword.cshtml" />
     <Content Include="Views\Home\ResetPassword.cshtml" />
-    <None Include="Properties\PublishProfiles\Test.pubxml" />
+    <None Include="Properties\PublishProfiles\Release-x86.pubxml" />
+    <None Include="Properties\PublishProfiles\Release-x64.pubxml" />
     <Content Include="Views\Repository\Tags.cshtml" />
     <Content Include="Views\Repository\_Tag.cshtml" />
     <None Include="Web.Test.config">
@@ -786,12 +621,59 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -832,12 +714,12 @@ xcopy/s /y /d "$(SolutionDir)packages\LibGit2Sharp.0.21.0.176\lib\net40\NativeBi
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\LibGit2Sharp.NativeBinaries.2.0.322\build\net46\LibGit2Sharp.NativeBinaries.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LibGit2Sharp.NativeBinaries.2.0.322\build\net46\LibGit2Sharp.NativeBinaries.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
     <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.Toolset.4.11.0\build\Microsoft.Net.Compilers.Toolset.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.Toolset.4.11.0\build\Microsoft.Net.Compilers.Toolset.props'))" />
+    <Error Condition="!Exists('..\packages\LibGit2Sharp.NativeBinaries.2.0.323\build\net46\LibGit2Sharp.NativeBinaries.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LibGit2Sharp.NativeBinaries.2.0.323\build\net46\LibGit2Sharp.NativeBinaries.props'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />

@@ -97,6 +97,8 @@ namespace gitserverdotnet
             {
                 AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
 
+                GitConfig.VerifyGitInstall();
+
                 new AutomaticUpdater().Run();
                 new RepositorySynchronizer().Run();
             }

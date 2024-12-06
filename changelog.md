@@ -4,10 +4,12 @@ description: Tracks changes and bug fixes between different versions of gitserve
 tags: [Changelog, Changes, Bug Fixes, Features]
 ---
 ## Version 6.6.0
-**28 November 2024**
+**6 December 2024**
 
 ### BREAKING CHANGES ###
 * Project renamed to gitserver.net (git-server-dot-net)
+* git binaries are no longer included - upon application start, binary is checked an installed if missing or invalid/out-of-date version
+* Project is now packaged per bitness for legacy servers.  Make sure you have the proper version for your platform and bitness.
 
 ### Maintenance ###
 * Re-targeted to .NET Framework v4.7.2
