@@ -487,15 +487,15 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="..\changelog.md">
+    <Content Include="..\changelog.md">
       <Link>changelog.md</Link>
-    </None>
+    </Content>
     <Content Include="..\license.md">
       <Link>license.md</Link>
     </Content>
-    <None Include="..\readme.md">
+    <Content Include="..\readme.md">
       <Link>readme.md</Link>
-    </None>
+    </Content>
     <Content Include="App_Data\Web.config" />
     <None Include=".bowerrc" />
     <None Include="bower.json" />
