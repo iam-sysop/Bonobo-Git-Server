@@ -1,0 +1,7 @@
+{
+  "name": "gitserver.net",
+  "dependencies": {
+    "pure": "0.4.2",
+	"font-awesome": "4.3.0"
+  }
+}
